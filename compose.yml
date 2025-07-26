@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  subtractor-app:
+    # Build the image using the Containerfile in the current directory
+    build: .
+    # Name the resulting image
+    image: kube-subtractor-app:latest
+    # Map port 8081 on your VM to port 8000 in the container
+    ports:
+      - "8081:8000"
+    # Pass the welcome message as an environment variable
+    environment:
+      - WELCOME_MESSAGE=Hello from my Deno app, running via compose!
+    # Restart the container automatically if it stops
+    restart: unless-stopped

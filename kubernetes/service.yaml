@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: subtractor-app-service
+spec:
+  type: NodePort
+  selector:
+    # This must match the labels in the deployment
+    app: subtractor-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+      # A static port on your Kind VM. Pick a free one from your config.
+      nodePort: 30083

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: subtractor-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: subtractor-app
+  template:
+    metadata:
+      labels:
+        app: subtractor-app
+    spec:
+      containers:
+      - name: subtractor-container
+        # Use the simple image name, exactly as you built it
+        image: kube-base-app-subtractor:v1.0.0
+        # CRITICAL: This tells Kubernetes "Do not try to pull from a remote
+        # registry if the image is already present on the node."
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        env:
+        - name: "WELCOME_MESSAGE"
+          value: "Running live in Kubernetes!"
