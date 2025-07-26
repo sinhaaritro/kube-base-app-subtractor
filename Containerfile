@@ -1,5 +1,5 @@
 # Use a specific, official Deno base image
-FROM denoland/deno:1.37.1
+FROM docker.io/denoland/deno:1.37.1
 
 # Set the working directory inside the container
 WORKDIR /app
