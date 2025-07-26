@@ -1,0 +1,31 @@
+name: Check Deno Code Validity
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out your repository's code using a specific major version
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up the Deno environment using a specific version number
+      # This is the key change to fix the error.
+      - name: Setup Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      # Step 3: Check the code for any Deno-specific errors
+      - name: Verify Deno code
+        run: deno lint
+
+      # Step 4: Type-check the code
+      - name: Type-check the code
+        run: deno check main.ts
